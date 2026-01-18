@@ -1,2 +1,1 @@
-A101 | lenova laptop | ₹100000.0
-A102 | Adobe Photoshop  | ₹10000.0
+A101|lenova laptop|Hardware|10000.0|new

@@ -1,9 +1,10 @@
-from file_manager import save_asset
 from asset import Hardware, Software
-from employee_menu import employees
 from utils import confirm_action
+from file_manager import read_data_from_assets, save_assets_data, save_assignments
+import employee_menu
 
-assets = {}
+# Load existing assets from file into the dictionary
+assets = read_data_from_assets()
 
 def asset_menu():
     while True:
@@ -11,59 +12,49 @@ def asset_menu():
         print("1. Add Asset")
         print("2. View Assets")
         print("3. Assign Asset to Employee")
-        print("4. Calculate Depreciation")
-        print("5. Back")
+        print("4. Back")
 
-        choice = input("Select option: ")
+        choice = input("Select option: ").strip()
 
         match choice:
             case "1":
-                asset_type = input("Type (Hardware/Software): ").lower()
+                atype = input("Type (Hardware/Software): ").lower()
                 name = input("Asset Name: ")
-                value = float(input("Asset Value: "))
-                asset_id = f"A{100 + len(assets) + 1}"
+                val = float(input("Asset Value: "))
+                # Generate unique ID
+                aid = f"A{100 + len(assets) + 1}"
 
-                if not confirm_action("Confirm add asset? (Y/N): "):
+                if atype == "hardware":
+                    cond = input("Condition: ")
+                    assets[aid] = Hardware(aid, name, val, cond)
+                elif atype == "software":
+                    exp = input("Expiry Date: ")
+                    assets[aid] = Software(aid, name, val, exp)
+                else:
+                    print("Invalid type!")
                     continue
 
-                match asset_type:
-                    case "hardware":
-                        condition = input("Condition: ")
-                        assets[asset_id] = Hardware(asset_id, name, value, condition)
-                    case "software":
-                        expiry = input("Expiry Date: ")
-                        assets[asset_id] = Software(asset_id, name, value, expiry)
-                    case _:
-                        print("Invalid asset type")
-                        continue
-
-                print(f"✔ Asset added with ID {asset_id}")
+                # --- CRITICAL FIX: This line writes to assets.txt ---
+                save_assets_data(assets)
+                print(f"✔ Asset {aid} added and saved to assets.txt")
 
             case "2":
-                for asset in assets.values():
-                    print(asset)
+                if not assets:
+                    print("No assets found.")
+                for a in assets.values():
+                    print(a)
 
             case "3":
                 aid = input("Asset ID: ")
                 eid = input("Employee ID: ")
-                if aid in assets and eid in employees:
-                    if confirm_action("Confirm assign asset? (Y/N): "):
-                        employees[eid].assets.append(assets[aid])
-                        print("✔ Asset assigned")
+                if aid in assets and eid in employee_menu.employees:
+                    emp = employee_menu.employees[eid]
+                    if assets[aid] not in emp.assets:
+                        emp.assets.append(assets[aid])
+                        save_assignments(employee_menu.employees)
+                        print("✔ Assigned and saved to assignments.txt")
                 else:
-                    print("Invalid ID")
+                    print("Invalid IDs.")
 
             case "4":
-                aid = input("Asset ID: ")
-                years = int(input("Enter years: "))
-                if aid in assets:
-                    val = assets[aid].depreciate(years)
-                    print(f"Current Value: ₹{val:.2f}")
-                else:
-                    print("Asset not found")
-
-            case "5":
                 break
-
-            case _:
-                print("Invalid choice")
