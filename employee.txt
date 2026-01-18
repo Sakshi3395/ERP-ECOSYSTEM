@@ -1,0 +1,2 @@
+E101|sahil kurpe |staff |250000.0
+E102|sakshi kurpe |manager |2500000.0
