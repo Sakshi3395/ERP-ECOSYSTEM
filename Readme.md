@@ -68,6 +68,32 @@ A full-stack Enterprise Resource Planning (ERP) system built with Flask backend 
    ```
    The app will be available at http://localhost:5173
 
+## Quick Start (Recommended)
+
+You can start both backend and frontend together using the orchestrator script:
+
+```bash
+npm install # (in the project root, only needed once)
+npm run start-all
+```
+- This will automatically activate the backend virtual environment, run the backend, and start the frontend.
+- The backend will use the Python venv located at `backend/venv`.
+- The frontend will run on http://localhost:5173
+
+### Environment Variables
+- Copy or create a `.env` file in `backend/` and `frontend/` as needed. These files are not tracked in git for security.
+- Example for backend/.env:
+  ```env
+  SECRET_KEY=your_secret_key
+  ADMIN_USERNAME=admin
+  ADMIN_PASSWORD=your_password
+  ```
+
+### Notes
+- If you change the backend venv location, update the script in `start.js`.
+- Make sure Python and Node.js are installed and available in your PATH.
+- For any issues, check the terminal output for errors.
+
 ## Usage
 
 1. Start the backend server
