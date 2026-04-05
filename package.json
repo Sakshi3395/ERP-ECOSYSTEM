@@ -1,0 +1,13 @@
+{
+  "name": "full_stack_erp",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "concurrently \"npm run dev --prefix frontend\" \"cmd /c cd backend && call venv\\Scripts\\activate.bat && python run.py\""
+    ,
+    "start-all": "node start.js"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}

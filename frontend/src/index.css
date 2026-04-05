@@ -1,0 +1,92 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&display=swap');
+@import 'tailwindcss';
+
+@theme {
+    /* Font families */
+    --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+    --font-serif: 'Merriweather', Georgia, serif;
+
+    --color-primary: #3b82f6;
+    /* vibrant blue – primary actions */
+    --color-primary-dark: #2563eb;
+    /* darker blue – hover states */
+    --color-secondary: #94a3b8;
+    /* slate – secondary elements */
+    --color-accent: #a78bfa;
+    /* violet – highlights, accents */
+    --color-success: #34d399;
+    /* emerald – success messages */
+    --color-warning: #fbbf24;
+    /* amber – warnings */
+    --color-danger: #f87171;
+    /* red – errors, destructive actions */
+
+    /* Neutral tones for dark mode */
+    --color-background: #0f172a;
+    /* dark slate – main background */
+    --color-surface: #1e293b;
+    /* lighter slate – cards, modals, sheets */
+    --color-text-primary: #f8fafc;
+    /* light slate – primary text */
+    --color-text-secondary: #cbd5e1;
+    /* medium slate – secondary text */
+    --color-border: #334155;
+    /* dark border */
+}
+
+@layer base {
+
+    body {
+        background-color: var(--color-background);
+        color: var(--color-text-primary);
+        font-family: var(--font-sans);
+        line-height: 1.6;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        font-family: var(--font-serif);
+        font-weight: 600;
+        line-height: 1.2;
+        color: var(--color-text-primary);
+    }
+
+    h1 {
+        font-size: 2.5rem;
+    }
+
+    h2 {
+        font-size: 2rem;
+    }
+
+    h3 {
+        font-size: 1.75rem;
+    }
+
+    h4 {
+        font-size: 1.5rem;
+    }
+
+    h5 {
+        font-size: 1.25rem;
+    }
+
+    h6 {
+        font-size: 1rem;
+    }
+
+    * {
+        border-color: var(--color-border);
+    }
+
+    :focus-visible {
+        outline: 2px solid var(--color-primary);
+        outline-offset: 2px;
+    }
+}

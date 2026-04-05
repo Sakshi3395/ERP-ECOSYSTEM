@@ -1,0 +1,10 @@
+.vscode
+vscode
+backend/myenv
+frontend/node_modules
+frontend/dist
+
+
+backend/nexgen_erg.db
+
+nexgen_erg.db
